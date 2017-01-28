@@ -1,5 +1,6 @@
 #!/bin/bash
 
+git status
 echo "Are you sure? yes/no"
 read CHOICE
 

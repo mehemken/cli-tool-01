@@ -39,6 +39,7 @@ def end():
 
 def abort():
     print("""Usage:\nlnotes [OPTIONS] for help type lnotes --help""")
+    print("The help message is coming soon")
     sys.exit()
 
 
