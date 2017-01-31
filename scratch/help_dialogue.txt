@@ -1,0 +1,12 @@
+
+Welcome to the help dialogue!
+#############################
+my_func         	That func tho...
+
+the_second      	This is the_second. It does nothing.
+
+king_code       	This is king_code. It does nothing.
+
+salamander      	This is salamander. It does nothing.
+
+help_text       	None
