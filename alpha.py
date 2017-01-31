@@ -70,7 +70,6 @@ def handle_args():
     if len(sys.argv) < 2:
         return help_text
     elif sys.argv[1] not in app.commands:
-        sys.stdout.write( msg )
         return help_text
     else:
         msg = 'Argument given: {}\n'.format( sys.argv[1] )
