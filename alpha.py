@@ -72,13 +72,13 @@ def handle_args():
     """
     if len(sys.argv) < 2:
         sys.stdout.write('No arguments given.\n')
-        sys.exit()
         help_text()
+        sys.exit()
     elif sys.argv[1] not in app.commands:
         msg = 'Wrong argument given.\n'
         sys.stdout.write( msg )
-        sys.exit()
         help_text()
+        sys.exit()
     else:
         msg = 'Argument given: {}\n'.format( sys.argv[1] )
         sys.stdout.write( msg )
