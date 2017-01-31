@@ -26,16 +26,17 @@ app = Commands()
 @app.help_dialogue
 def help_text():
     msg = """
-    To start the session use:
-    $ lnotes up
+Usage:
+    $ lnotes [OPTIONS]
 
-    To end the session use:
-    $ lnotes down
+--- Options:
+up                starts the session
 
-    To set working directory of
-    the next session use:
-    $ lnotes set [FULL PATH]
-    """
+down              ends the session
+
+set [FILEPATH]    sets the  working directory of
+                  the next session.
+"""
     sys.stdout.write( msg )
     sys.exit()
 
@@ -61,24 +62,16 @@ def set():
 ##### main
 
 
-def main():
-    sys.stdout.write('\nWelcome to l(ocal)notes!\n')
-    return handle_args()
-
-
 def handle_args():
     """
     Returns function object corresponding to option given.
     """
+    option = None
     if len(sys.argv) < 2:
-        sys.stdout.write('No arguments given.\n')
-        help_text()
-        sys.exit()
+        return help_text
     elif sys.argv[1] not in app.commands:
-        msg = 'Wrong argument given.\n'
         sys.stdout.write( msg )
-        help_text()
-        sys.exit()
+        return help_text
     else:
         msg = 'Argument given: {}\n'.format( sys.argv[1] )
         sys.stdout.write( msg )
@@ -86,6 +79,17 @@ def handle_args():
     return option
 
 
+def main():
+    sys.stdout.write('\nWelcome to l(ocal)notes!\n')
+    return handle_args()
+
+
 if __name__ == '__main__':
+
     option = main()
-    option()
+    if callable(option):
+        option()
+    else:
+        print(type(option))
+        print(option)
+        sys.exit('Option is not callable')
