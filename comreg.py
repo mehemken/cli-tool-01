@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 class Commands:
     def __init__(self):
         self.commands = {}
@@ -13,10 +14,8 @@ class Commands:
         return 0
 
     def help_dialogue(self, func):
-        def help_decorator():
-            pass
         self.commands['help'] = func
-        return 0
+        return func
 
 
 if __name__ == '__main__':
