@@ -6,8 +6,8 @@ import os
 
 class Comreg:
     def __init__(self):
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        current_directory = dir_path + '/static/current_working_directory.txt'
+        self.running_dir = os.path.dirname(os.path.realpath(__file__))
+        current_directory = self.running_dir + '/static/current_working_directory.txt'
         with open(current_directory, 'r') as f:
             self.working_directory = f.readline()
         with open('help_dialogue.txt', 'w') as f:

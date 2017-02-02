@@ -1,8 +1,9 @@
+	Current directory:
+	/home/emilio/Documents/thoughts/
+	Usage:
 
-Usage
------
 up           Starts a new tmux session with the notes app and several windows.
 
-down         this is down
+down         Shuts down the notes app, git commits and ends the tmux session.
 
-set          this is set
+set          This sets the working directory for next lnotes session.
