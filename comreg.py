@@ -1,10 +1,18 @@
 #!/usr/bin/env python
 
 
+import os
+
+
 class Comreg:
     def __init__(self):
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        current_directory = dir_path + '/static/current_working_directory.txt'
+        with open(current_directory, 'r') as f:
+            self.working_directory = f.readline()
         with open('help_dialogue.txt', 'w') as f:
-            msg = '\nUsage\n-----'
+            msg = """\tCurrent directory:\n\t{}\n\tUsage:\n""".format(
+                    self.working_directory )
             f.write( msg )
         self.commands = {}
         self.help_message = ''
@@ -18,7 +26,7 @@ class Comreg:
         self.commands['%s' % name] = func
 
         name = self._dname(name)
-        dialogue = '\n{}\t{}\n'.format(name, help_doc)
+        dialogue = '\n{} {}\n'.format(name, help_doc)
         self.help_message += dialogue
         with open('help_dialogue.txt', 'a') as f:
             f.write( dialogue )
@@ -34,7 +42,7 @@ class Comreg:
         return func
 
     def _dname(self, name):
-        add_spaces = 16 - (len(name))
+        add_spaces = 12 - (len(name))
         spaces = ' ' * add_spaces
         return name + spaces
 

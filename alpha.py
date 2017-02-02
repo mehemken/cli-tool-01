@@ -13,7 +13,8 @@ The end sequence will always include a git commit.
 """
 
 
-import sys
+import sys, os
+from subprocess import call
 from comreg import Comreg
 
 
@@ -25,33 +26,44 @@ app = Comreg()
 
 @app.help_dialogue
 def help_text():
-    """foo"""
-    # msg = ''
-    # with open('help_dialogue.txt', 'r') as f:
-        # for line in f:
-            # msg += line
-    return 'foo' #msg
-
+    msg = ''
+    with open('help_dialogue.txt', 'r') as f:
+        for line in f:
+            msg += line
+        msg += '\n'
+    sys.stdout.write( msg )
+    return msg
 
 @app.command
 def up():
-    """this is up"""
-    sys.stdout.write('This starts the program.\n')
-    # run the start bash script
-
+    """Starts a new tmux session with the notes app and several windows."""
+#    dir_path = os.path.dirname(os.path.realpath(__file__))
+#    current_directory = dir_path + '/static/current_working_directory.txt'
+#    with open(current_directory, 'w') as f:
+#        f.write(result)
+# Fix this... python can't find  static/up.sh.
+    sys.stdout.write( 'New wd: {}\n'.format( result ) )
+    call( ['bash', 'static/up.sh'] )
 
 @app.command
 def down():
-    """this is down"""
+    """Shuts down the notes app, git commits and ends the tmux session."""
     sys.stdout.write('This ends the program.\n')
-    # run the end bash script
-
+    call( ['bash', 'static/down.sh'] )
 
 @app.command
 def set():
-    """this is set"""
-    sys.stdout.write('This sets the working directory for next lnotes session.\n')
-    # run the end bash script
+    """This sets the working directory for next lnotes session."""
+    if sys.argv[2]:
+        result = sys.argv[2]
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        current_directory = dir_path + '/static/current_working_directory.txt'
+        with open(current_directory, 'w') as f:
+            f.write(result)
+        sys.stdout.write( 'New wd: {}\n'.format( result ) )
+    else:
+        result = help_text()
+    return result
 
 
 ##### main
@@ -67,23 +79,22 @@ def handle_args():
     elif sys.argv[1] not in app.commands:
         return help_text
     else:
-        msg = 'Argument given: {}\n'.format( sys.argv[1] )
+        msg = '--- {} ---\n'.format( sys.argv[1] )
+        msg.upper()
         sys.stdout.write( msg )
         option = app.commands[ sys.argv[1] ]
     return option
 
 
 def main():
-    sys.stdout.write('\nWelcome to l(ocal)notes!\n')
-    return handle_args()
+    sys.stdout.write('\nWelcome to l(ocal)notes!\n\n')
+    option = handle_args()
+    if callable(option):
+        result = option()
+    return result
 
 
 if __name__ == '__main__':
 
     option = main()
-    if callable(option):
-        option()
-    else:
-        print(type(option))
-        print(option)
-        sys.exit('Option is not callable')
+    print()

@@ -1,8 +1,8 @@
 
 Usage
 -----
-up              	this is up
+up           Starts a new tmux session with the notes app and several windows.
 
-down            	this is down
+down         this is down
 
-set             	this is set
+set          this is set

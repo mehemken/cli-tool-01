@@ -14,10 +14,10 @@ The end sequence will always include a git commit.
 
 
 import sys
-from comreg import Commands
+from comreg import Comreg
 
 
-app = Commands()
+app = Comreg()
 
 
 ##### commands
@@ -25,36 +25,31 @@ app = Commands()
 
 @app.help_dialogue
 def help_text():
-    msg = """
-Usage:
-    $ lnotes [OPTIONS]
-
---- Options:
-up                starts the session
-
-down              ends the session
-
-set [FILEPATH]    sets the  working directory of
-                  the next session.
-"""
-    sys.stdout.write( msg )
-    sys.exit()
+    """foo"""
+    # msg = ''
+    # with open('help_dialogue.txt', 'r') as f:
+        # for line in f:
+            # msg += line
+    return 'foo' #msg
 
 
 @app.command
 def up():
+    """this is up"""
     sys.stdout.write('This starts the program.\n')
     # run the start bash script
 
 
 @app.command
 def down():
+    """this is down"""
     sys.stdout.write('This ends the program.\n')
     # run the end bash script
 
 
 @app.command
 def set():
+    """this is set"""
     sys.stdout.write('This sets the working directory for next lnotes session.\n')
     # run the end bash script
 
