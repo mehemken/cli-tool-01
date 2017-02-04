@@ -26,6 +26,7 @@ app = Comreg()
 
 @app.help_dialogue
 def help_text():
+    sys.stdout.write('\nWelcome to l(ocal)notes!\n\n')
     msg = ''
     with open('help_dialogue.txt', 'r') as f:
         for line in f:
@@ -37,19 +38,14 @@ def help_text():
 @app.command
 def up():
     """Starts a new tmux session with the notes app and several windows."""
-#    dir_path = os.path.dirname(os.path.realpath(__file__))
-#    current_directory = dir_path + '/static/current_working_directory.txt'
-#    with open(current_directory, 'w') as f:
-#        f.write(result)
-# Fix this... python can't find  static/up.sh.
-    sys.stdout.write( 'New wd: {}\n'.format( result ) )
-    call( ['bash', 'static/up.sh'] )
+    up_file = app.running_dir + '/static/up.sh'
+    call( ['bash', up_file] )
 
 @app.command
 def down():
     """Shuts down the notes app, git commits and ends the tmux session."""
-    sys.stdout.write('This ends the program.\n')
-    call( ['bash', 'static/down.sh'] )
+    down_file = app.running_dir + '/static/down.sh'
+    call( ['bash', down_file] )
 
 @app.command
 def set():
@@ -79,7 +75,7 @@ def handle_args():
     elif sys.argv[1] not in app.commands:
         return help_text
     else:
-        msg = '--- {} ---\n'.format( sys.argv[1] )
+        msg = '--- lnotes: {} ---\n'.format( sys.argv[1] )
         msg.upper()
         sys.stdout.write( msg )
         option = app.commands[ sys.argv[1] ]
@@ -87,7 +83,6 @@ def handle_args():
 
 
 def main():
-    sys.stdout.write('\nWelcome to l(ocal)notes!\n\n')
     option = handle_args()
     if callable(option):
         result = option()

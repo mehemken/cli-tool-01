@@ -13,4 +13,10 @@ done
 
 docker ps
 
+sleep 1
+
+echo 'bye!'
+
+sleep .123
+
 tmux kill-session -t $SESSION_NAME

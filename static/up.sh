@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR=$SESSION_NAME
+DIR=$1
 SESSION_NAME='notes'
 
 cd $DIR
