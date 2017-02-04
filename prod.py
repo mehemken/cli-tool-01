@@ -39,7 +39,7 @@ def help_text():
 def up():
     """Starts a new tmux session with the notes app and several windows."""
     up_file = app.running_dir + '/static/up.sh'
-    call( ['bash', up_file] )
+    call( ['bash', up_file, app.working_directory] )
 
 @app.command
 def down():
