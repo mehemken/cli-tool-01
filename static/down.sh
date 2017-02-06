@@ -1,22 +1,9 @@
 #!/usr/bin/env bash
 
-
-SESSION_NAME='notes'
-
-tmux send-keys -t $SESSION_NAME:0 'fig down' enter
-
-for i in 5 4 3 2 1
-do
+for (( i=5; i>0; i=i-1 )); do
     echo "killing notes session in $i seconds"
     sleep 1
 done
 
-docker ps
-
-sleep 1
-
-echo 'bye!'
-
-sleep .123
-
-tmux kill-session -t $SESSION_NAME
+cd ~/Documents/notes/
+docker-compose down
