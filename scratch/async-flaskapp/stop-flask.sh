@@ -7,8 +7,10 @@ for (( i=3; i>0; i=i-1 )); do
 	echo "Child: $i"
 	sleep 1
 done
-
-echo "Child: shutting down the flaskapp."
+echo "The second ps"
+ps >> ps-output.txt
+echo "Child: shut down the flaskapp?"
+read
 docker-compose down
 echo "Child: flask app is down."
 
