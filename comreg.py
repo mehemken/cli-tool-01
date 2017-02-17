@@ -10,7 +10,8 @@ class Comreg:
         current_directory = self.running_dir + '/static/current_working_directory.txt'
         with open(current_directory, 'r') as f:
             self.working_directory = f.readline()
-        with open('help_dialogue.txt', 'w') as f:
+        self.help_file = self.running_dir + '/static/help_dialogue.txt'
+        with open(self.help_file, 'w') as f:
             msg = """\tCurrent directory:\n\t{}\n\tUsage:\n""".format(
                     self.working_directory )
             f.write( msg )
@@ -28,7 +29,7 @@ class Comreg:
         name = self._dname(name)
         dialogue = '\n{} {}\n'.format(name, help_doc)
         self.help_message += dialogue
-        with open('help_dialogue.txt', 'a') as f:
+        with open(self.help_file, 'a') as f:
             f.write( dialogue )
         return func
 

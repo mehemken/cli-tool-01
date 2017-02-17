@@ -1,1 +1,1 @@
-/home/emilio/Documents/code-gitless/MongoUniversity/chapter_four/
+/home/emilio/Documents/code-gitless/tmux/lnotes/scratch

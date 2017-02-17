@@ -28,7 +28,7 @@ app = Comreg()
 def help_text():
     sys.stdout.write('\nWelcome to l(ocal)notes!\n\n')
     msg = ''
-    with open('help_dialogue.txt', 'r') as f:
+    with open(app.help_file, 'r') as f:
         for line in f:
             msg += line
         msg += '\n'
