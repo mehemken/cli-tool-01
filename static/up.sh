@@ -34,15 +34,10 @@ done
 # Start the tmux server
 cd $DIR
 tmux start-server
-tmux new-session -d -s $SESSION_NAME
+tmux new-session -d -s $SESSION_NAME -n work
 
-tmux new-window -t $SESSION_NAME:1 -n work
+tmux split-window -t $SESSION_NAME:0 -v
 
-tmux send-keys -t $SESSION_NAME:0 'docker ps' enter
-
-tmux split-window -t $SESSION_NAME:1 -v
-tmux send-keys -t $SESSION_NAME:1 'source activate jupyter; clear' enter
-
-tmux select-window -t $SESSION_NAME:1
+tmux select-window -t $SESSION_NAME:0
 tmux attach -t $SESSION_NAME
 
