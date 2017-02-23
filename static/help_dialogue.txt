@@ -1,5 +1,5 @@
 	Current directory:
-	/home/emilio/Documents/AWS
+	/home/emilio/Documents/code-gitless/MongoUniversity/final
 	Usage:
 
 up           Starts a new tmux session with the notes app and several windows.

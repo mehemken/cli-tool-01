@@ -4,7 +4,7 @@ SESSION_NAME='notes'
 
 for (( i=3; i>0; i=i-1 )); do
     echo "killing notes session in $i seconds"
-    sleep 1
+    sleep .6
 done
 
 cd ~/Documents/notes/
