@@ -50,13 +50,22 @@ def down():
 @app.command
 def set():
     """This sets the working directory for next lnotes session."""
-    if sys.argv[2]:
-        result = sys.argv[2]
+    def set_given_dir(result):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         current_directory = dir_path + '/static/current_working_directory.txt'
         with open(current_directory, 'w') as f:
             f.write(result)
         sys.stdout.write( 'New wd: {}\n'.format( result ) )
+    try:
+        dot = sys.argv[2]
+    except:
+        print('Not enough args. lnotes set requires args.')
+    if dot == '.':
+        result = os.getcwd()
+        set_given_dir(result)
+    elif sys.argv[2]:
+        result = sys.argv[2]
+        set_given_dir(result)
     else:
         result = help_text()
     return result

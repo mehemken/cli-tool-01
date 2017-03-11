@@ -1,5 +1,5 @@
 	Current directory:
-	/home/emilio/Documents/code-gitless/jenkins-tutorial/basic-jenkins
+	/home/emilio/Documents/prof/resume
 	Usage:
 
 up           Starts a new tmux session with the notes app and several windows.
