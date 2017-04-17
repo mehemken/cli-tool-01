@@ -1,5 +1,5 @@
 	Current directory:
-	/home/emilio/Documents/prof/resume
+	/home/emilio/go/src
 	Usage:
 
 up           Starts a new tmux session with the notes app and several windows.
