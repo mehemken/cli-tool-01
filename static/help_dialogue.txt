@@ -1,5 +1,5 @@
 	Current directory:
-	/home/emilio/go/src
+	/home/emilio/Documents/AWS/qwiklabs
 	Usage:
 
 up           Starts a new tmux session with the notes app and several windows.

@@ -36,6 +36,8 @@ cd $DIR
 tmux start-server
 tmux new-session -d -s $SESSION_NAME -n work
 
+tmux send-keys 'source /home/emilio/.local/bin/aws_zsh_completer.sh'
+tmux send-keys C-l
 tmux split-window -t $SESSION_NAME:0 -v
 
 tmux select-window -t $SESSION_NAME:0
