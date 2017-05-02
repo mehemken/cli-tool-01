@@ -45,6 +45,10 @@ def help_text():
 @app.command
 def up():
     """Starts a new tmux session with the notes app and several windows."""
+
+    up_file = app.running_dir + '/static/up.sh'
+    call( ['bash', up_file, app.working_directory] )
+
     # Redo the webbrowser open with python
     success = False
     while success != True:
@@ -52,15 +56,13 @@ def up():
             response = requests.get('http://localhost:42424')
         except:
             logger.exception('Site is not ready yet')
-            time.sleep(0.123)
+            time.sleep(3)
         else:
             success = True
             webbrowser.open('http://localhost:42424')
         finally:
             logger.info('Ok we\'re all set.')
 
-    up_file = app.running_dir + '/static/up.sh'
-    call( ['bash', up_file, app.working_directory] )
 
 
 @app.command
