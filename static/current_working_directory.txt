@@ -1,1 +1,1 @@
-/home/emilio/Documents/AWS/qwiklabs
+/home/emilio/Documents/code-gitless/tmux/lnotes/

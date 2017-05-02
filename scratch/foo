@@ -1,0 +1,6 @@
+status check...
+
+while loop
+curl localhost:42424/ready
+If not... wait a bit.
+else open firefox at localhost:42424

@@ -11,11 +11,18 @@ The tool will have two options. The first one will
 start the session and the second option will end it.
 The end sequence will always include a git commit.
 """
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 
 import sys, os
 from subprocess import call
 from comreg import Comreg
+import requests
+import webbrowser
+import time
 
 
 app = Comreg()
@@ -38,8 +45,23 @@ def help_text():
 @app.command
 def up():
     """Starts a new tmux session with the notes app and several windows."""
+    # Redo the webbrowser open with python
+    success = False
+    while success != True:
+        try:
+            response = requests.get('http://localhost:42424')
+        except:
+            logger.exception('Site is not ready yet')
+            time.sleep(0.123)
+        else:
+            success = True
+            webbrowser.open('http://localhost:42424')
+        finally:
+            logger.info('Ok we\'re all set.')
+
     up_file = app.running_dir + '/static/up.sh'
     call( ['bash', up_file, app.working_directory] )
+
 
 @app.command
 def down():
