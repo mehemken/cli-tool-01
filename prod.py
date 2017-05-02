@@ -47,7 +47,8 @@ def up():
     """Starts a new tmux session with the notes app and several windows."""
 
     up_file = app.running_dir + '/static/up.sh'
-    call( ['bash', up_file, app.working_directory] )
+    #call( ['bash', up_file, app.working_directory] )
+    cmd = subprocess.Popen( ['bash', up_file, app.working_directory] )
 
     # Redo the webbrowser open with python
     success = False
@@ -56,7 +57,7 @@ def up():
             response = requests.get('http://localhost:42424')
         except:
             logger.exception('Site is not ready yet')
-            time.sleep(3)
+            time.sleep(0.5)
         else:
             success = True
             webbrowser.open('http://localhost:42424')

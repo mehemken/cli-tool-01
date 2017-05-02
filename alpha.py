@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 import sys, os
-from subprocess import call
+import subprocess
 from comreg import Comreg
 import requests
 import webbrowser
@@ -47,7 +47,7 @@ def up():
     """Starts a new tmux session with the notes app and several windows."""
 
     up_file = app.running_dir + '/static/up.sh'
-    #call( ['bash', up_file, app.working_directory] )
+    #subprocess.call( ['bash', up_file, app.working_directory] )
     cmd = subprocess.Popen( ['bash', up_file, app.working_directory] )
 
     # Redo the webbrowser open with python
@@ -70,7 +70,7 @@ def up():
 def down():
     """Shuts down the notes app, git commits and ends the tmux session."""
     down_file = app.running_dir + '/static/down.sh'
-    call( ['bash', down_file] )
+    subprocess.call( ['bash', down_file] )
 
 @app.command
 def set():
