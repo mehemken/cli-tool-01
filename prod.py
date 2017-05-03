@@ -50,8 +50,6 @@ def up():
     up_file = app.running_dir + '/static/up.sh'
     def start_tmux():
         cmd = subprocess.Popen( ['bash', up_file, app.working_directory],
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE)
         #subprocess.call( ['bash', up_file, app.working_directory] )
         logger.info('Tmux launched.')

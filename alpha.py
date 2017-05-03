@@ -46,12 +46,25 @@ def help_text():
 @app.command
 def up():
     """Starts a new tmux session with the notes app and several windows."""
+    # DIR=$1
+    # SESSION_NAME='notes'
+    # 
+    # ######################################################
+    # # Start the flaskapp
+    # 
+    # cd ~/Documents/notes/
+    # docker-compose up -d &
+    # FLASK_PID=$!
+    # echo "flaskapp running (PID $FLASK_PID)"
 
-    up_file = app.running_dir + '/static/up.sh'
+
+    def start_docker():
+        cmd = 'cd ~/Documents/notes/ && docker-compose up -d'.split()
+        subprocess.call(cmd)
+
     def start_tmux():
-        cmd = subprocess.Popen( ['bash', up_file, app.working_directory],
-                stderr=subprocess.PIPE)
-        #subprocess.call( ['bash', up_file, app.working_directory] )
+        up_file = app.running_dir + '/static/up.sh'
+        subprocess.call( ['bash', up_file, app.working_directory] )
         logger.info('Tmux launched.')
 
     def start_browser():
@@ -66,11 +79,12 @@ def up():
                 webbrowser.open('http://localhost:42424')
                 break
 
-    launch_tmux = Thread(target=start_tmux)
-    launch_browser = Thread(target=start_browser)
+    start_tmux()
 
-    launch_tmux.start()
+    launch_browser = Thread(target=start_browser)
+    launch_docker = Thread(target=start_docker)
     launch_browser.start()
+    launch_docker.start()
 
 
 

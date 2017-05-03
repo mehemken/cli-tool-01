@@ -6,10 +6,10 @@ SESSION_NAME='notes'
 ######################################################
 # Start the flaskapp
 
-cd ~/Documents/notes/
-docker-compose up -d &
-FLASK_PID=$!
-echo "flaskapp running (PID $FLASK_PID)"
+# cd ~/Documents/notes/
+# docker-compose up -d &
+# FLASK_PID=$!
+# echo "flaskapp running (PID $FLASK_PID)"
 
 ######################################################
 # Start the firefox
