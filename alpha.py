@@ -77,7 +77,6 @@ def up():
                 break
 
     docker_event = Event()
-    start_tmux()
 
     launch_browser = Thread(target=start_browser)
     launch_docker = Thread(target=start_docker)
@@ -86,6 +85,7 @@ def up():
 
     docker_event.wait()
     launch_browser.start()
+    start_tmux()
 
 
 
