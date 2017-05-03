@@ -52,7 +52,12 @@ def up():
         DOCKER_ROOT = os.path.abspath('~/Documents/notes/')
         os.chdir(DOCKER_ROOT)
         cmd = shlex.split('docker-compose up -d')
-        subprocess.call(cmd)
+        try:
+            subprocess.call(cmd)
+        except:
+            logger.exception('The start_docker function failed')
+        else:
+            docker_event.set()
 
     def start_tmux():
         up_file = app.running_dir + '/static/up.sh'
@@ -71,12 +76,16 @@ def up():
                 webbrowser.open('http://localhost:42424')
                 break
 
+    docker_event = Event()
     start_tmux()
 
     launch_browser = Thread(target=start_browser)
     launch_docker = Thread(target=start_docker)
-    launch_browser.start()
+
     launch_docker.start()
+
+    docker_event.wait()
+    launch_browser.start()
 
 
 

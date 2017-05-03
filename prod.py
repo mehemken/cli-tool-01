@@ -18,6 +18,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 import sys, os
+import shlex
 import subprocess
 from comreg import Comreg
 import requests
@@ -46,20 +47,11 @@ def help_text():
 @app.command
 def up():
     """Starts a new tmux session with the notes app and several windows."""
-    # DIR=$1
-    # SESSION_NAME='notes'
-    # 
-    # ######################################################
-    # # Start the flaskapp
-    # 
-    # cd ~/Documents/notes/
-    # docker-compose up -d &
-    # FLASK_PID=$!
-    # echo "flaskapp running (PID $FLASK_PID)"
-
 
     def start_docker():
-        cmd = 'cd ~/Documents/notes/ && docker-compose up -d'.split()
+        DOCKER_ROOT = os.path.abspath('~/Documents/notes/')
+        os.chdir(DOCKER_ROOT)
+        cmd = shlex.split('docker-compose up -d')
         subprocess.call(cmd)
 
     def start_tmux():
