@@ -23,7 +23,7 @@ from comreg import Comreg
 import requests
 import webbrowser
 import time
-from threading import Thread
+from threading import Thread, Event
 
 
 app = Comreg()
@@ -50,6 +50,8 @@ def up():
     up_file = app.running_dir + '/static/up.sh'
     def start_tmux():
         subprocess.call( ['bash', up_file, app.working_directory] )
+        logger.info('Tmux launched.')
+        tmux_starter.set()
         #cmd = subprocess.Popen( ['bash', up_file, app.working_directory] )
 
     def start_browser():
@@ -64,10 +66,14 @@ def up():
                 webbrowser.open('http://localhost:42424')
                 break
 
-    tmux_server = Thread(target=start_tmux)
+    tmux_starter = Event()
+
+    launch_tmux = Thread(target=start_tmux)
     launch_browser = Thread(target=start_browser)
 
-    tmux_server.start()
+    launch_tmux.start()
+
+    tmux_starter.wait()
     launch_browser.start()
 
 
