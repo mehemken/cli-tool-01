@@ -49,7 +49,7 @@ def up():
     """Starts a new tmux session with the notes app and several windows."""
 
     def start_docker():
-        DOCKER_ROOT = os.path.abspath('~/Documents/notes/')
+        DOCKER_ROOT = os.path.abspath('/home/emilio/Documents/notes/')
         os.chdir(DOCKER_ROOT)
         cmd = shlex.split('docker-compose up -d')
         try:
