@@ -69,8 +69,8 @@ def up():
         for _ in range(10):
             try:
                 response = requests.get('http://localhost:42424')
-            except:
-                logger.exception('Site is not ready yet')
+            except ConnectionResetError:
+                logger.info('Site is not ready yet')
                 time.sleep(0.5)
             else:
                 webbrowser.open('http://localhost:42424')
