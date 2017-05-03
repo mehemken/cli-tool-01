@@ -49,10 +49,12 @@ def up():
 
     up_file = app.running_dir + '/static/up.sh'
     def start_tmux():
-        subprocess.call( ['bash', up_file, app.working_directory] )
+        cmd = subprocess.Popen( ['bash', up_file, app.working_directory],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE)
+        #subprocess.call( ['bash', up_file, app.working_directory] )
         logger.info('Tmux launched.')
-        tmux_starter.set()
-        #cmd = subprocess.Popen( ['bash', up_file, app.working_directory] )
 
     def start_browser():
         # Redo the webbrowser open with python
@@ -66,14 +68,10 @@ def up():
                 webbrowser.open('http://localhost:42424')
                 break
 
-    tmux_starter = Event()
-
     launch_tmux = Thread(target=start_tmux)
     launch_browser = Thread(target=start_browser)
 
     launch_tmux.start()
-
-    tmux_starter.wait()
     launch_browser.start()
 
 
