@@ -74,9 +74,11 @@ def up():
                 time.sleep(0.5)
             else:
                 webbrowser.open('http://localhost:42424')
+                browser_event.set()
                 break
 
     docker_event = Event()
+    browser_event = Event()
 
     launch_browser = Thread(target=start_browser)
     launch_docker = Thread(target=start_docker)
@@ -85,6 +87,8 @@ def up():
 
     docker_event.wait()
     launch_browser.start()
+
+    browser_event.wait()
     start_tmux()
 
 

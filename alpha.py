@@ -65,7 +65,6 @@ def up():
         logger.info('Tmux launched.')
 
     def start_browser():
-        # Redo the webbrowser open with python
         for _ in range(10):
             try:
                 response = requests.get('http://localhost:42424')
@@ -89,6 +88,7 @@ def up():
     launch_browser.start()
 
     browser_event.wait()
+    time.sleep(2)
     start_tmux()
 
 
