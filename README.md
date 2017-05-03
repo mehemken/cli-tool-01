@@ -1,4 +1,4 @@
-#Command line tool
+# Command line tool
 
 This command line tool controls the flask container in my other repo, localnotes-md. Essentially, the goal of this thing is to launch and stop the docker container and a tmux session in the project folder of my choice.
 
