@@ -23,6 +23,7 @@ from comreg import Comreg
 import requests
 import webbrowser
 import time
+from threading import Thread
 
 
 app = Comreg()
@@ -47,22 +48,27 @@ def up():
     """Starts a new tmux session with the notes app and several windows."""
 
     up_file = app.running_dir + '/static/up.sh'
-    #subprocess.call( ['bash', up_file, app.working_directory] )
-    cmd = subprocess.Popen( ['bash', up_file, app.working_directory] )
+    def start_tmux():
+        subprocess.call( ['bash', up_file, app.working_directory] )
+        #cmd = subprocess.Popen( ['bash', up_file, app.working_directory] )
 
-    # Redo the webbrowser open with python
-    success = False
-    while success != True:
-        try:
-            response = requests.get('http://localhost:42424')
-        except:
-            logger.exception('Site is not ready yet')
-            time.sleep(0.5)
-        else:
-            success = True
-            webbrowser.open('http://localhost:42424')
-        finally:
-            logger.info('Ok we\'re all set.')
+    def start_browser():
+        # Redo the webbrowser open with python
+        for _ in range(10):
+            try:
+                response = requests.get('http://localhost:42424')
+            except:
+                logger.exception('Site is not ready yet')
+                time.sleep(0.5)
+            else:
+                webbrowser.open('http://localhost:42424')
+                break
+
+    tmux_server = Thread(target=start_tmux)
+    launch_browser = Thread(target=start_browser)
+
+    tmux_server.start()
+    launch_browser.start()
 
 
 
